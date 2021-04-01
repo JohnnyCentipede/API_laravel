@@ -38,9 +38,17 @@ class AuthorController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Author $author)
+    
     {
-        return new AuthorResource($author);
+        $author =  Author::find($id);
+        if ($author){
+            return new AuthorResource($author);
+        }
+        else{
+            return response()->json(['message' => 'This author does not exist'], 404);
+        }
     }
+
 
     /**
      * Update the specified resource in storage.
